@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -14,21 +15,17 @@ public class CollectionExample {
 
         Comparator<Integer> ascendingOrder = Integer::compare;
         System.out.println("Even numbers " + oddOld(integers));
-        System.out.println("Odd numbers " + oddNew(integers, ascendingOrder));
+        System.out.println("Odd numbers " + getNumbers(integers, ascendingOrder, i -> i % 2 != 0));
 
         Comparator<Integer> descendingOrder = ascendingOrder.reversed();
         System.out.println("Odd numbers " + evenOld(integers));
-        System.out.println("Even numbers " + evenNew(integers, descendingOrder));
+        System.out.println("Even numbers " + getNumbers(integers, descendingOrder, i -> i % 2 == 0));
 
 
     }
 
-    private static Collection<Number> evenNew(List<Integer> integers, Comparator<Integer> sortOrder) {
-        return integers.stream().filter(i -> i % 2 == 0).sorted(sortOrder).collect(Collectors.toList());
-    }
-
-    private static Collection<Number> oddNew(List<Integer> integers, Comparator<Integer> sortOrder) {
-        return integers.stream().filter(i -> i % 2 != 0).sorted(sortOrder).collect(Collectors.toList());
+    private static Collection<Number> getNumbers(List<Integer> integers, Comparator<Integer> sortOrder, Predicate<Integer> predicate) {
+        return integers.parallelStream().filter(predicate).sorted(sortOrder).collect(Collectors.toList());
     }
 
     private static Collection<Integer> evenOld(List<Integer> numbers) {

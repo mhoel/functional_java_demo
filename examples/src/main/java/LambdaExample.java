@@ -1,6 +1,4 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.function.Function;
 
 /**
@@ -16,23 +14,13 @@ public class LambdaExample {
     }
 
     public static void main(String[] args) {
-        helloLambda(new Function<Integer, String>() {
-            @Override
-            public String apply(Integer number) {
-                return String.valueOf(number * 2);
-            }
-        });
+        helloLambda(number -> String.valueOf(number * 2));
 
         buttonExample();
     }
 
     private static void buttonExample() {
         Button button = new Button();
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Button pressed");
-            }
-        });
+        button.addActionListener(e -> System.out.println("Button pressed"));
     }
 }
