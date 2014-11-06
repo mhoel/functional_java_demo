@@ -36,7 +36,6 @@ public class RealExample {
                     for (Skill skill : employee.getSkills()) {
                         if (skill.getSkillName().equals("Java")) {
                             employees.add(employee);
-                            break;
                         }
                     }
                 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class OfficeFactory {
 
     public Office createOffice(Location location) {
-        Office office = new Office(Location.OSLO, createEmployees(location));
+        Office office = new Office(location, createEmployees(location));
         return office;
     }
 
